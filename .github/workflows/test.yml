@@ -46,3 +46,10 @@ jobs:
         run: |
           forge script script/Counter.s.sol:CounterScript --rpc-url ${{ secrets.RPC_URL }} --private-key ${{ secrets.PK }} --broadcast
         id: deploy
+
+      - name: Archive Deploy Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-report
+          path: broadcast/**/*.json
+
