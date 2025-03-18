@@ -48,6 +48,12 @@ anvil
 ### Deploy
 
 ```shell
+forge script <your_script> --rpc-url <node_rpc_url> --private-key <your_private_key> --broadcast
+```
+
+Eg: deploy the "Counter" Smart Contract deployed:
+
+```shell
 forge script script/Counter.s.sol:CounterScript --rpc-url <node_rpc_url> --private-key <your_private_key> --broadcast
 ```
 
