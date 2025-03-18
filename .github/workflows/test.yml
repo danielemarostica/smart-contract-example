@@ -41,3 +41,8 @@ jobs:
         run: |
           forge test -vvv
         id: test
+
+      - name: Deploy
+        run: |
+          forge script script/Counter.s.sol:CounterScript --rpc-url ${{ secrets.RPC_URL }} --private-key ${{ secrets.PK }}
+        id: deploy
