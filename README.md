@@ -1,17 +1,14 @@
-## Foundry
+## Smart Contract Example
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+I created this simple project to showcase how to deploy an EVM compatible Smart Contract with the [Mia-Platform Console](https://mia-platform.eu/platform/console/)
 
+Under the hood, this Smart Contract is bilt using [Foundry](https://book.getfoundry.sh): a fast, portable and modular toolkit for Ethereum application development written in Rust.  
 Foundry consists of:
 
 - **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
 - **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
 - **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
 - **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-Read more [here](https://book.getfoundry.sh)
 
 ## Usage
 
@@ -41,6 +38,9 @@ forge snapshot
 
 ### Anvil
 
+Use Anvil to run an Local Ethereum node for testing purposes
+By default this node runs on `localhost:8545`
+
 ```shell
 anvil
 ```
@@ -48,25 +48,30 @@ anvil
 ### Deploy
 
 ```shell
-forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+forge script script/Counter.s.sol:CounterScript --rpc-url <node_rpc_url> --private-key <your_private_key> --broadcast
 ```
 
-OR
+Here some RPC-URLs:
 
-```shell
-forge create Counter --rpc-url <your_rpc_url> --private-key <your_private_key> --broadcast
-```
+- Local Anvil: `localhost:8545`
+- "Amoy" the Polygon testnet: `https://rpc-amoy.polygon.technology/`
 
 ### Cast
+
+Use cast to interact with the Ethereum Node
 
 ```shell
 cast <subcommand>
 ```
 
-### Help
+Eg: retrieve the counter from the "Counter" Smart Contract deployed on Amoy testnet:
 
 ```shell
-forge --help
-anvil --help
-cast --help
+cast call 0x673c16401AD6960655548B049Db56a75bbBcef38 "retrieve()" --rpc-url https://rpc-amoy.polygon.technology/
+```
+
+Eg: set the counter of the "Counter" Smart Contract deployed on Amoy testnet to a custom value:
+
+```shell
+cast send 0x673c16401AD6960655548B049Db56a75bbBcef38 "store(uint256)" 42 --rpc-url https://rpc-amoy.polygon.technology/ --private-key <your_private_key>
 ```
